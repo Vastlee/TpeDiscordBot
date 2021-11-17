@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TPEBot {
+namespace TpeDiscordBot {
     class Program {
         static void Main(string[] args) {
             var discordBot = new Bot();

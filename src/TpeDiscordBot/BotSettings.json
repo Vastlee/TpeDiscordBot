@@ -1,5 +1,6 @@
 {
-  "GuildId": "839645961147121684",
-  "WelcomeChannelId": "839645961147121687",
-  "RolesMessageId": "910381810201014282"
+  "GuildId" : 839645961147121684,
+  "WelcomeChannelId" : 839645961147121687,
+  "RolesMessageId": 910381810201014282, 
+  "LastDYELTopicUpdate" :  "1/1/0001 12:00:00 AM"
 }

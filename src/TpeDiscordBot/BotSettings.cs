@@ -1,12 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using System;
 
 namespace TpeDiscordBot;
 
+[System.Serializable]
 public struct BotSettings {
-    [JsonProperty("GuildId")]
     public ulong GuildId { get; init; }
-    [JsonProperty("WelcomeChannelId")]
     public ulong WelcomeChannelId { get; init; }
-    [JsonProperty("RolesMessageId")]
     public ulong RolesMessageId { get; init; }
+    public DateTime LastDYELTitleUpdate { get; init; }
 }

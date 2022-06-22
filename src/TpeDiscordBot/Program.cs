@@ -1,12 +1,7 @@
-﻿using System;
+﻿namespace TpeDiscordBot;
 
-namespace TpeDiscordBot {
-    class Program {
-        static void Main(string[] args) {
-            var discordBot = new Bot();
-            discordBot.RunAsync()
-                .GetAwaiter()
-                .GetResult();
-        }
+class Program {
+    static void Main() {
+        new Bot().RunAsync().GetAwaiter().GetResult();
     }
 }

@@ -11,11 +11,27 @@ internal class FunCommands : BaseCommandModule {
     private readonly DateTime DYELStartTime = new(2021, 11, 3);
 
     [Command("Give")]
-    public async Task Give(CommandContext ctx, DiscordMember targetUser, uint amountToGive, DiscordEmoji emojiToGive) {
+    public static async Task Give(CommandContext ctx, DiscordMember targetUser, uint amountToGive, DiscordEmoji emojiToGive) {
         StringBuilder message = new($"Congrats {targetUser.Mention}! {ctx.User.Mention} thinks you deserve ");
         Pluralize(ref message, amountToGive, emojiToGive);
 
-        await ctx.Channel.SendMessageAsync($"{message}!").ConfigureAwait(false);
+        await MessageChannel(ctx.Channel, $"{message}");
+    }
+
+    [Command("NextBM")]
+    public static async Task NextBM(CommandContext ctx, int currentDay) {
+        StringBuilder message = new("The Next Blood Moon is ");
+
+        int daysUntil = currentDay % 7;
+        int nextBM = currentDay + 7 - daysUntil;
+
+        if(daysUntil == 0) {
+            message.Append("TODAY!!!");
+        } else {
+            message.Append($"on day {nextBM}!");
+        }
+
+        await MessageChannel(ctx.Channel, $"{message}");
     }
 
     [Command("DYEL")]
@@ -32,43 +48,42 @@ internal class FunCommands : BaseCommandModule {
             _ => "... something broke. I have no idea what day it is!"
         };
 
-        await ctx
-            .Channel
-            .SendMessageAsync($"Today Is the {liftDay} of the routine. {flex}{flex}{flex}")
-            .ConfigureAwait(false);
+        await MessageChannel(ctx.Channel, $"Today Is the {liftDay} of the routine. {flex}{flex}");
     }
 
     [Command("Praise")]
-    public async Task Priase(CommandContext ctx, DiscordMember targetUser) {
+    public static async Task Priase(CommandContext ctx, DiscordMember targetUser) {
         foreach(DiscordMember user in ctx.Guild.Members.Values) {
             if(user.Id == targetUser.Id) {
-                await ctx
-                    .Channel
-                    .SendMessageAsync($"You're doing a great job {targetUser.DisplayName}!")
-                    .ConfigureAwait(false);
+                await MessageChannel(ctx.Channel, $"You're doing a great job {targetUser.DisplayName}!");
             }
         }
     }
 
     [Command("Sum")]
     [Description("Returns the Sum of the numbers")]
-    public async Task Sum(CommandContext ctx, params int[] nums) {
+    public static async Task Sum(CommandContext ctx, params int[] nums) {
         int result = 0;
         for(int i = 0; i < nums.Length; i++) {
             result += nums[i];
         }
-        await ctx
-            .Channel
-            .SendMessageAsync($"{result}")
-            .ConfigureAwait(false);
+        await MessageChannel(ctx.Channel, $"{result}");
     }
 
-    private void Pluralize(ref StringBuilder s, uint num, DiscordEmoji emoji) {
+    private static async Task MessageChannel(DiscordChannel channel, string message) {
+        await channel.SendMessageAsync(message).ConfigureAwait(false);
+    }
+
+    private static void Pluralize(ref StringBuilder s, uint num, DiscordEmoji emoji) {
         if(num > 1) {
             s.Append($"{num} {emoji}'s");
         } else {
             s.Append($"a {emoji}");
         }
+    }
+
+    private static void Pluralize(ref StringBuilder s, int num) {
+        if(num == 1) { s.Append("'s"); }
     }
 }
 

@@ -14,17 +14,22 @@
     <OutputPath>\\MEDIAPC\Dev\TpeDiscordBot\</OutputPath>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>E:\TPETpeDiscordBot\Debug\</OutputPath>
+    <Optimize>False</Optimize>
+  </PropertyGroup>
+
   <ItemGroup>
-    <PackageReference Include="DSharpPlus" Version="4.1.0" />
-    <PackageReference Include="DSharpPlus.CommandsNext" Version="4.1.0" />
-    <PackageReference Include="DSharpPlus.Interactivity" Version="4.1.0" />
-    <PackageReference Include="Humanizer" Version="2.11.10" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="DSharpPlus" Version="4.2.0" />
+    <PackageReference Include="DSharpPlus.CommandsNext" Version="4.2.0" />
+    <PackageReference Include="DSharpPlus.Interactivity" Version="4.2.0" />
+    <PackageReference Include="Humanizer" Version="2.14.1" />
+    <PackageReference Include="OpenAI-DotNet" Version="3.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <None Update="BotSettings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="config.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
